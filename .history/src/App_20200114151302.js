@@ -99,7 +99,7 @@ const HeaderStart = () => {
       </li>
       <li>
         <NavLink activeClassName="active" to="/movieinfo">
-          MovieInfo Simple
+          MovieInfo
         </NavLink>
       </li>
       <li>
@@ -138,18 +138,18 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/movieinfoall">
-            MovieInfo All
+          <NavLink activeClassName="active" to="/people">
+            People
           </NavLink>
         </li>
         <li>
           <NavLink activeClassName="active" to="/movieinfo">
-            MovieInfo Simple
+            MovieInfo
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/admin">
-            Admin Page
+          <NavLink activeClassName="active" to="/edit">
+            Edit
           </NavLink>
         </li>
         <li>
@@ -173,13 +173,13 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="active" to="/movieinfoall">
-          MovieInfo All
+        <NavLink activeClassName="active" to="/people">
+          People
         </NavLink>
       </li>
       <li>
         <NavLink activeClassName="active" to="/movieinfo">
-          MovieInfo Simple
+          MovieInfo
         </NavLink>
       </li>
       <li>
@@ -197,14 +197,14 @@ const Content = ({ logout }) => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/movieinfoall">
-        <MovieInfoAll />
+      <Route path="/people">
+        <People />
       </Route>
       <Route path="/movieinfo">
         <MovieInfo />
       </Route>
-      <Route path="/admin">
-        <MovieCount />
+      <Route path="/edit">
+        <Edit />
       </Route>
       <Route path="/logout">
         <Logout logout={logout} />
@@ -224,56 +224,36 @@ const Home = () => {
   );
 };
 
-const MovieInfoAll = () => {
-  const emptyMovie = {
-    title: "",
-    year: 0,
-    plot: "",
-    directors: "",
-    genres: "",
-    cast: "",
-    poster: "",
-    imdbScore: 0,
-    rottenScore: 0,
-    metaScore: 0
-  };
+const People = () => {
+  const [dataFromServer, setDataFromServer] = useState("Fetching...");
+  const [listPeople, setListPeople] = useState([]);
 
-  const [movie, setMovie] = useState(emptyMovie);
-  const [title, setTitle] = useState("");
-
-  const handleChange = event => {
-    const target = event.target;
-    setTitle(target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    const finalTitle = title.split(" ").join("%20");
-    setTitle(finalTitle);
-    facade.fetchMovieInfoAll(title).then(res => setMovie(res));
-  };
+  useEffect(() => {
+    facade.fetchData().then(res => setDataFromServer(res.msg));
+  }, []);
+  useEffect(() => {
+    let didCancel = false;
+    facade.fetchPeople().then(res => {
+      if (didCancel === false) {
+        setListPeople(res);
+        console.log("Fetching complete");
+      }
+    });
+    return () => {
+      didCancel = true;
+    };
+  }, []);
   return (
-    <div className="col-md-8">
-      <h3>Search Movie Info with Score</h3>
-      <input
-        id="title"
-        value={title}
-        onChange={handleChange}
-        placeholder="Enter movie title"
-      ></input>
-      <br></br>
-      <button onClick={handleSubmit}>Search</button>
-      <h3>Movie Info</h3>
-      <p>Title: {movie.title}</p>
-      <p>Year: {movie.year}</p>
-      <p>Plot: {movie.plot}</p>
-      <p>Directors: {movie.directors}</p>
-      <p>Genres: {movie.genres}</p>
-      <p>Cast: {movie.cast}</p>
-      <p>IMDB Score: {movie.imdbScore}</p>
-      <p>RottenTomato Score: {movie.rottenScore}</p>
-      <p>Metacritic Score: {movie.metaScore}</p>
-      <img src={movie.poster} alt="" height="auto" width="50%"></img>
+    <div>
+      <h3>Data Received from server</h3>
+    </div>
+  );
+};
+
+const Edit = () => {
+  return (
+    <div>
+      <h3>Find and Edit</h3>
     </div>
   );
 };
@@ -316,21 +296,13 @@ const MovieInfo = () => {
       <br></br>
       <button onClick={handleSubmit}>Search</button>
       <h3>Movie Info</h3>
-      <p>Title: {movie.title}</p>
-      <p>Year: {movie.year}</p>
-      <p>Plot: {movie.plot}</p>
-      <p>Directors: {movie.directors}</p>
-      <p>Genres: {movie.genres}</p>
-      <p>Cast: {movie.cast}</p>
+      <p>{movie.title}</p>
+      <p>{movie.year}</p>
+      <p>{movie.plot}</p>
+      <p>{movie.directors}</p>
+      <p>{movie.genres}</p>
+      <p>{movie.cast}</p>
       <img src={movie.poster} alt="" height="auto" width="50%"></img>
-    </div>
-  );
-};
-
-const MovieCount = () => {
-  return (
-    <div>
-      <h3>Admin Page</h3>
     </div>
   );
 };

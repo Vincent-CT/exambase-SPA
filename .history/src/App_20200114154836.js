@@ -330,7 +330,7 @@ const MovieInfo = () => {
 const MovieCount = () => {
   return (
     <div>
-      <h3>Admin Page</h3>
+      <h3>Find and Edit</h3>
     </div>
   );
 };

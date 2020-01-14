@@ -1,5 +1,5 @@
-const URL = "https://vincentcph.dk/exambase";
-//const URL = "http://localhost:8080/exambase";
+// const URL = "https://vincentcph.dk/exambase";
+const URL = "http://localhost:8080/exambase";
 
 function handleHttpErrors(res) {
   if (!res.ok) {

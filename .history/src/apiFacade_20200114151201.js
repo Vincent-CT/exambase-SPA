@@ -1,5 +1,5 @@
-const URL = "https://vincentcph.dk/exambase";
-//const URL = "http://localhost:8080/exambase";
+// const URL = "https://vincentcph.dk/exambase";
+const URL = "http://localhost:8080/exambase";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -65,15 +65,14 @@ function apiFacade() {
 
   const fetchMovieInfoSimple = movieTitle => {
     const options = makeOptions("GET", true); //True add's the token
-    return fetch(
-      URL + "/api/movie/movie-info-simple/" + movieTitle,
-      options
-    ).then(handleHttpErrors);
+    return fetch(URL + "/api/movie/movieinfo/" + movieTitle, options).then(
+      handleHttpErrors
+    );
   };
 
   const fetchMovieInfoAll = movieTitle => {
     const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/movie/movie-info-all/" + movieTitle, options).then(
+    return fetch(URL + "/api/movie/movieinfoall/" + movieTitle, options).then(
       handleHttpErrors
     );
   };

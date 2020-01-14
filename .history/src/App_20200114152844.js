@@ -148,8 +148,8 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/admin">
-            Admin Page
+          <NavLink activeClassName="active" to="/edit">
+            Edit
           </NavLink>
         </li>
         <li>
@@ -203,8 +203,8 @@ const Content = ({ logout }) => {
       <Route path="/movieinfo">
         <MovieInfo />
       </Route>
-      <Route path="/admin">
-        <MovieCount />
+      <Route path="/edit">
+        <Edit />
       </Route>
       <Route path="/logout">
         <Logout logout={logout} />
@@ -327,10 +327,10 @@ const MovieInfo = () => {
   );
 };
 
-const MovieCount = () => {
+const Edit = () => {
   return (
     <div>
-      <h3>Admin Page</h3>
+      <h3>Find and Edit</h3>
     </div>
   );
 };

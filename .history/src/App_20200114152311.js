@@ -148,8 +148,8 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/admin">
-            Admin Page
+          <NavLink activeClassName="active" to="/edit">
+            Edit
           </NavLink>
         </li>
         <li>
@@ -203,8 +203,8 @@ const Content = ({ logout }) => {
       <Route path="/movieinfo">
         <MovieInfo />
       </Route>
-      <Route path="/admin">
-        <MovieCount />
+      <Route path="/edit">
+        <Edit />
       </Route>
       <Route path="/logout">
         <Logout logout={logout} />
@@ -264,15 +264,15 @@ const MovieInfoAll = () => {
       <br></br>
       <button onClick={handleSubmit}>Search</button>
       <h3>Movie Info</h3>
-      <p>Title: {movie.title}</p>
-      <p>Year: {movie.year}</p>
-      <p>Plot: {movie.plot}</p>
-      <p>Directors: {movie.directors}</p>
-      <p>Genres: {movie.genres}</p>
-      <p>Cast: {movie.cast}</p>
-      <p>IMDB Score: {movie.imdbScore}</p>
-      <p>RottenTomato Score: {movie.rottenScore}</p>
-      <p>Metacritic Score: {movie.metaScore}</p>
+      <p>{movie.title}</p>
+      <p>{movie.year}</p>
+      <p>{movie.plot}</p>
+      <p>{movie.directors}</p>
+      <p>{movie.genres}</p>
+      <p>{movie.cast}</p>
+      <p>{movie.imdbScore}</p>
+      <p>{movie.rottenScore}</p>
+      <p>{movie.metaScore}</p>
       <img src={movie.poster} alt="" height="auto" width="50%"></img>
     </div>
   );
@@ -316,21 +316,21 @@ const MovieInfo = () => {
       <br></br>
       <button onClick={handleSubmit}>Search</button>
       <h3>Movie Info</h3>
-      <p>Title: {movie.title}</p>
-      <p>Year: {movie.year}</p>
-      <p>Plot: {movie.plot}</p>
-      <p>Directors: {movie.directors}</p>
-      <p>Genres: {movie.genres}</p>
-      <p>Cast: {movie.cast}</p>
+      <p>{movie.title}</p>
+      <p>{movie.year}</p>
+      <p>{movie.plot}</p>
+      <p>{movie.directors}</p>
+      <p>{movie.genres}</p>
+      <p>{movie.cast}</p>
       <img src={movie.poster} alt="" height="auto" width="50%"></img>
     </div>
   );
 };
 
-const MovieCount = () => {
+const Edit = () => {
   return (
     <div>
-      <h3>Admin Page</h3>
+      <h3>Find and Edit</h3>
     </div>
   );
 };
