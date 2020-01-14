@@ -309,6 +309,7 @@ const MovieInfo = () => {
   return (
     <div className="col-md-8">
       <h3>Search Simple Movie Info</h3>
+      <p>{title}</p>
       <input
         id="title"
         value={title}

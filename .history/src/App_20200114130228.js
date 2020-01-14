@@ -281,50 +281,9 @@ const Edit = () => {
 };
 
 const MovieInfo = () => {
-  const emptyMovie = {
-    title: "",
-    year: 0,
-    plot: "",
-    directors: "",
-    genres: "",
-    cast: "",
-    poster: ""
-  };
-
-  const [movie, setMovie] = useState(emptyMovie);
-  const [title, setTitle] = useState("");
-
-  const handleChange = event => {
-    const target = event.target;
-    setTitle(target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    const finalTitle = title.split(" ").join("%20");
-    setTitle(finalTitle);
-    facade.fetchMovieInfoSimple(title).then(res => setMovie(res));
-  };
-
   return (
     <div className="col-md-8">
-      <h3>Search Simple Movie Info</h3>
-      <input
-        id="title"
-        value={title}
-        onChange={handleChange}
-        placeholder="Enter movie title"
-      ></input>
-      <br></br>
-      <button onClick={handleSubmit}>Search</button>
-      <h3>Movie Info</h3>
-      <p>{movie.title}</p>
-      <p>{movie.year}</p>
-      <p>{movie.plot}</p>
-      <p>{movie.directors}</p>
-      <p>{movie.genres}</p>
-      <p>{movie.cast}</p>
-      <img src={movie.poster} alt="" height="auto" width="50%"></img>
+      <h3>Simple MovieInfo</h3>
     </div>
   );
 };

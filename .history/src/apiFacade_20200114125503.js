@@ -63,9 +63,9 @@ function apiFacade() {
     return fetch(URL + "/api/info/user/people", options).then(handleHttpErrors);
   };
 
-  const fetchMovieInfoSimple = movieTitle => {
+  const fetchMovieInfoSimple = title => {
     const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/movie/movieinfo/" + movieTitle, options).then(
+    return fetch(URL + "/api/movie/movieinfo/" + title, options).then(
       handleHttpErrors
     );
   };
@@ -96,8 +96,7 @@ function apiFacade() {
     fetchData,
     getRole,
     fetchPeople,
-    getUser,
-    fetchMovieInfoSimple
+    getUser
   };
 }
 const facade = apiFacade();

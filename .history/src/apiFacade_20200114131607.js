@@ -63,11 +63,12 @@ function apiFacade() {
     return fetch(URL + "/api/info/user/people", options).then(handleHttpErrors);
   };
 
-  const fetchMovieInfoSimple = movieTitle => {
+  const fetchMovieInfoSimple = () => {
     const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/movie/movieinfo/" + movieTitle, options).then(
-      handleHttpErrors
-    );
+    return fetch(
+      URL + "/api/movie/movieinfo/The%20Nutty%20Professor",
+      options
+    ).then(handleHttpErrors);
   };
 
   const makeOptions = (method, addToken, body) => {

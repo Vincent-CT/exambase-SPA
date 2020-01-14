@@ -304,11 +304,13 @@ const MovieInfo = () => {
     const finalTitle = title.split(" ").join("%20");
     setTitle(finalTitle);
     facade.fetchMovieInfoSimple(title).then(res => setMovie(res));
+    console.log(movie);
   };
 
   return (
     <div className="col-md-8">
       <h3>Search Simple Movie Info</h3>
+      <p>{title}</p>
       <input
         id="title"
         value={title}

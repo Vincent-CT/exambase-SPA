@@ -288,11 +288,25 @@ const MovieInfo = () => {
     directors: "",
     genres: "",
     cast: "",
-    poster: ""
+    plot: ""
   };
+  const emptyTitle = "The%20Nutty%20Professor";
 
   const [movie, setMovie] = useState(emptyMovie);
   const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    let didCancel = false;
+    facade.fetchMovieInfoSimple(emptyTitle).then(res => {
+      if (didCancel === false) {
+        setMovie(res);
+        console.log("Fetching complete");
+      }
+    });
+    return () => {
+      didCancel = true;
+    };
+  }, []);
 
   const handleChange = event => {
     const target = event.target;
@@ -303,12 +317,12 @@ const MovieInfo = () => {
     event.preventDefault();
     const finalTitle = title.split(" ").join("%20");
     setTitle(finalTitle);
-    facade.fetchMovieInfoSimple(title).then(res => setMovie(res));
   };
 
   return (
     <div className="col-md-8">
       <h3>Search Simple Movie Info</h3>
+      <p>{title}</p>
       <input
         id="title"
         value={title}
@@ -317,14 +331,15 @@ const MovieInfo = () => {
       ></input>
       <br></br>
       <button onClick={handleSubmit}>Search</button>
-      <h3>Movie Info</h3>
+
+      <p>{movie.title}</p>
       <p>{movie.title}</p>
       <p>{movie.year}</p>
       <p>{movie.plot}</p>
       <p>{movie.directors}</p>
       <p>{movie.genres}</p>
       <p>{movie.cast}</p>
-      <img src={movie.poster} alt="" height="auto" width="50%"></img>
+      <p>{movie.poster}</p>
     </div>
   );
 };
